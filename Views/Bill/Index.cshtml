@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Done)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fat)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,6 +45,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Done)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fat)
+                </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
