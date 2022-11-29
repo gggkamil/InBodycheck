@@ -1,4 +1,4 @@
-﻿using InBodycheck.Models;
+using InBodycheck.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +6,9 @@ namespace InBodycheck.Controllers
 {
     public class BillController : Controller
     {
-        private static IList<BillModel> bills = new List<BillModel>()
-        {
-            new BillModel(){ ReceiptID =1, Name = "WIzyta  u lekarza",Description= "Godzina 17:00", Done=false}
+        private static IList<BillModel> bills = new List<BillModel>(){
+            new BillModel(){Id = 1, Name = "rachunek",Description = "Do schudnięcia 17,8kg",Done = false,Fat = 17}
+             new BillModel(){Id = 2, Name = "rachunek2",Description = "Do schudnięcia 18kg",Done = false,Fat = 18}
         };
         // GET: BillController
         public ActionResult Index()
