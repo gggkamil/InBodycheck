@@ -6,11 +6,14 @@ namespace InBodycheck.Controllers
 {
     public class BillController : Controller
     {
-        private static IList<BillModel> bills = new List<BillModel>();
+        private static IList<BillModel> bills = new List<BillModel>()
+        {
+            new BillModel(){ ReceiptID =1, Name = "WIzyta  u lekarza",Description= "Godzina 17:00", Done=false}
+        };
         // GET: BillController
         public ActionResult Index()
         {
-            return View();
+            return View(bills);
         }
 
         // GET: BillController/Details/5
@@ -22,22 +25,18 @@ namespace InBodycheck.Controllers
         // GET: BillController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new BillModel());
         }
 
         // POST: BillController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(BillModel billModel)
         {
-            try
-            {
+            billModel.ReceiptID = bills.Count + 1;
+            bills.Add(billModel);
+
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: BillController/Edit/5
