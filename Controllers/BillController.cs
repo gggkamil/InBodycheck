@@ -1,4 +1,4 @@
-﻿using InBodycheck.Models;
+using InBodycheck.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,22 +25,18 @@ namespace InBodycheck.Controllers
         // GET: BillController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new BillModel());
         }
 
         // POST: BillController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(BillModel billModel)
         {
-            try
-            {
+            billModel.ReceiptID = bills.Count + 1;
+            bills.Add(billModel);
+
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: BillController/Edit/5
