@@ -7,8 +7,8 @@ namespace InBodycheck.Controllers
     public class BillController : Controller
     {
         private static IList<BillModel> bills = new List<BillModel>(){
-            new BillModel(){ReceiptID = 1, Name = "rachunek",Description = "Do schudnięcia 17,8kg",Done = false,Fat = 17},
-             new BillModel(){ReceiptID = 2, Name = "rachunek2",Description = "Do schudnięcia 18kg",Done = false,Fat = 18}
+            new BillModel(){ReceiptID = 1, Name = "rachunek",Description = "Do schudnięcia 17,8kg",Done = false,Fat = 17,Date=DateTime.Now},
+             new BillModel(){ReceiptID = 2, Name = "rachunek2",Description = "Do schudnięcia 18kg",Done = false,Fat = 18,Date=DateTime.Now}
         };
         // GET: BillController
         public ActionResult Index()

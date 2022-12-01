@@ -7,5 +7,6 @@
         public string Description { get; set; }
         public bool  Done { get; set; }
         public int Fat { get; set; }
+        public DateTime Date { get; set; }
     }
 }
