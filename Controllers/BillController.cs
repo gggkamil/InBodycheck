@@ -14,12 +14,12 @@ namespace InBodycheck.Controllers
         public ActionResult Index()
         {
             return View(bills);
-        }
+          }
 
         // GET: BillController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(bills.FirstOrDefault(x=> x.ReceiptID == id));
         }
 
         // GET: BillController/Create
