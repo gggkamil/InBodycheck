@@ -10,25 +10,25 @@ namespace InBodycheck.Controllers
             new BillModel(){ReceiptID = 1, Name = "rachunek",Description = "Do schudnięcia 17,8kg",Done = false,Fat = 17,Date=DateTime.Now},
              new BillModel(){ReceiptID = 2, Name = "rachunek2",Description = "Do schudnięcia 18kg",Done = false,Fat = 18,Date=DateTime.Now}
         };
-        // GET: BillController
+        // GET: Bill
         public ActionResult Index()
         {
-            return View(bills);
+            return View(bills.Where(x=> !x.Done));
           }
 
-        // GET: BillController/Details/5
+        // GET: Bill/Details/5
         public ActionResult Details(int id)
         {
             return View(bills.FirstOrDefault(x=> x.ReceiptID == id));
         }
 
-        // GET: BillController/Create
+        // GET: Bill/Create
         public ActionResult Create()
         {
             return View(new BillModel());
         }
 
-        // POST: BillController/Create
+        // POST: Bill/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(BillModel billModel)
@@ -39,46 +39,44 @@ namespace InBodycheck.Controllers
                 return RedirectToAction(nameof(Index));
         }
 
-        // GET: BillController/Edit/5
+        // GET: Bill/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(bills.FirstOrDefault(x=> x.ReceiptID == id));
         }
 
-        // POST: BillController/Edit/5
+        // POST: Bill/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, BillModel billModel)
         {
-            try
-            {
+            BillModel bill = bills.FirstOrDefault(x=> x.ReceiptID == id);
+            bill.Name = billModel.Name;
+            bill.Description = billModel.Description;
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
-        // GET: BillController/Delete/5
+        // GET: Bill/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(bills.FirstOrDefault(x =>x.ReceiptID == id));
         }
 
-        // POST: BillController/Delete/5
+        // POST: Bill/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, BillModel billModel)
         {
-            try
-            {
+            BillModel bill = bills.FirstOrDefault(x => x.ReceiptID == id);
+            bills.Remove(bill);
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        }
+        // GET: Task/Done/5
+        public ActionResult Done(int id)
+        {
+            BillModel bill = bills.FirstOrDefault(x => x.ReceiptID == id);
+            bill.Done = true;
+            return RedirectToAction(nameof(Index));
         }
     }
 }
