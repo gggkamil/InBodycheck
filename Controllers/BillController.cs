@@ -1,4 +1,5 @@
 using InBodycheck.Models;
+using InBodycheck.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,20 +7,22 @@ namespace InBodycheck.Controllers
 {
     public class BillController : Controller
     {
-        private static IList<BillModel> bills = new List<BillModel>(){
-            new BillModel(){ReceiptID = 1, Name = "rachunek",Description = "Do schudnięcia 17,8kg",Done = false,Fat = 17,Date=DateTime.Now},
-             new BillModel(){ReceiptID = 2, Name = "rachunek2",Description = "Do schudnięcia 18kg",Done = false,Fat = 18,Date=DateTime.Now}
-        };
+        private readonly IBillRepository _billRepository;
+        public BillController(IBillRepository billRepository)
+        {
+            _billRepository = billRepository;
+        }
+
         // GET: Bill
         public ActionResult Index()
         {
-            return View(bills.Where(x=> !x.Done));
+            return View(_billRepository.GetAllActive());
           }
 
         // GET: Bill/Details/5
         public ActionResult Details(int id)
         {
-            return View(bills.FirstOrDefault(x=> x.ReceiptID == id));
+            return View(_billRepository.Get(id));
         }
 
         // GET: Bill/Create
@@ -33,8 +36,7 @@ namespace InBodycheck.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BillModel billModel)
         {
-            billModel.ReceiptID = bills.Count + 1;
-            bills.Add(billModel);
+            _billRepository.Add(billModel);
 
                 return RedirectToAction(nameof(Index));
         }
@@ -42,7 +44,7 @@ namespace InBodycheck.Controllers
         // GET: Bill/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(bills.FirstOrDefault(x=> x.ReceiptID == id));
+            return View(_billRepository.Get(id));
         }
 
         // POST: Bill/Edit/5
@@ -50,16 +52,14 @@ namespace InBodycheck.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, BillModel billModel)
         {
-            BillModel bill = bills.FirstOrDefault(x=> x.ReceiptID == id);
-            bill.Name = billModel.Name;
-            bill.Description = billModel.Description;
+            _billRepository.Update(id, billModel);
                 return RedirectToAction(nameof(Index));
         }
 
         // GET: Bill/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(bills.FirstOrDefault(x =>x.ReceiptID == id));
+            return View(_billRepository.Get(id));
         }
 
         // POST: Bill/Delete/5
@@ -67,15 +67,15 @@ namespace InBodycheck.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, BillModel billModel)
         {
-            BillModel bill = bills.FirstOrDefault(x => x.ReceiptID == id);
-            bills.Remove(bill);
+            _billRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
         }
         // GET: Task/Done/5
         public ActionResult Done(int id)
         {
-            BillModel bill = bills.FirstOrDefault(x => x.ReceiptID == id);
+            BillModel bill = _billRepository.Get(id);
             bill.Done = true;
+            _billRepository.Update(id, bill);
             return RedirectToAction(nameof(Index));
         }
     }
