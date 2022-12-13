@@ -13,10 +13,10 @@
     <thead>
         <tr>
             
-            <th>
+            <th style ="width:35%">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th style ="width:35%">
                 @Html.DisplayNameFor(model => model.Fat)
             </th>
             <th></th>
@@ -25,10 +25,13 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td style="width:65%">
+            <td style="width:5%">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td style="width:65%">
+                <td style="width:5%">
+                    @Html.DisplayFor(modelItem => item.Fat)
+                </td>
+            <td style="inline-size">
                 @Html.ActionLink("Gotowe", "Done", new { id=item.ReceiptID  }, new { @class = "btn btn-success"})
                     @Html.ActionLink("Szczegóły", "Details", new { id=item.ReceiptID}, new { @class = "btn btn-info"})
                     @Html.ActionLink("Edytuj", "Edit", new { id=item.ReceiptID  }, new { @class = "btn btn-warning"})
