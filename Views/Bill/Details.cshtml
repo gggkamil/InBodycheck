@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Szczegóły</h1>
+<h1 class="display-4">Szczegóły</h1>
 
 <div>
     <h4>BillModel</h4>
@@ -32,6 +32,6 @@
        
 </div>
 <div>
-    @Html.ActionLink("Edytuj", "Edit", new {  id = Model.ReceiptID}) |
-    <a asp-action="Index">Wróć do listy raachunków</a>
+    @Html.ActionLink("Edytuj", "Edit", new {  id = Model.ReceiptID}, new { @class="btn btn-warning"})
+    <a class="btn btn-dark" asp-action="Index">Wróć do listy raachunków</a>
 </div>
