@@ -31,12 +31,13 @@
                 <td style="width:5%">
                     @Html.DisplayFor(modelItem => item.Fat)
                 </td>
-            <td style="inline-size">
+            <td >
                 @Html.ActionLink("Gotowe", "Done", new { id=item.ReceiptID  }, new { @class = "btn btn-success"})
                     @Html.ActionLink("Szczegóły", "Details", new { id=item.ReceiptID}, new { @class = "btn btn-info"})
                     @Html.ActionLink("Edytuj", "Edit", new { id=item.ReceiptID  }, new { @class = "btn btn-warning"})
                     @Html.ActionLink("Usuń", "Delete", new {  id=item.ReceiptID }, new { @class = "btn btn-danger"})
             </td>
+           
         </tr>
 }
     </tbody>
