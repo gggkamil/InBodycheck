@@ -18,6 +18,7 @@ namespace InBodycheck.Models
         [Required(ErrorMessage = "Pole opis jest wymagane.")]
         public string Description { get; set; }
         public bool  Done { get; set; }
+        [Required(ErrorMessage = "Pole tłuszcz jest wymagane.")]
         public int Fat { get; set; }
         
     }
