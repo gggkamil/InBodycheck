@@ -1,6 +1,6 @@
 using InBodycheck.Models;
 using InBodycheck.Repositories;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace InBodycheck.Controllers
